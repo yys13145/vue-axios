@@ -38,15 +38,15 @@ export default {
         timeout:5000
     })
 
-    //实际开发
-    let insrance = axios.create({
-        baseURL:'http://localhost:9090',
-        timeout:1000
-    });
-    let insrance = axios.create({
-        baseURL:'http://localhost:9091',
-        timeout:3000
-    });
+    // //实际开发
+    // let instance1 = axios.create({
+    //     baseURL:'http://localhost:9090',
+    //     timeout:1000
+    // });
+    // let instance2 = axios.create({
+    //     baseURL:'http://localhost:9091',
+    //     timeout:3000
+    // });
 
   }
 }

@@ -6,6 +6,7 @@ import test3 from '../views/test3.vue'
 import test4 from '../views/test4.vue'
 import test5 from '../views/test5.vue'
 import test6 from '../views/test6.vue'
+import contactList from '../views/contactList.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/test6',
     name: 'test6',
     component: test6
+  },
+  {
+    path: '/contactList',
+    name: 'contactList',
+    component: contactList
   },
   {
     path: '/about',
