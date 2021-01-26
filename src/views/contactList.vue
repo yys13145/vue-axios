@@ -48,13 +48,9 @@ export default {
     this.getList();
   },
   methods:{
-    getList(){
-      this.instance.get('/contactList')
-      .then(res=>{
-        this.list = res.data.data;
-      }).catch(err=>{
-        Toast(err);
-      })
+    async getList(){
+      let res = await this.$Http.getContactList();
+      this.list = res.data;
     },
     onAdd(){
       this.show = true;
@@ -66,43 +62,30 @@ export default {
       this.isEdit = true;
       this.editingContact = contact;
     },
-    onSave(info){
+    async onSave(info){
       if(this.isEdit){
-        this.instance.put('/contact/edit',info)
-        .then(res=>{
-          console.log(res);
+        let res = await this.$Http.editContact(info);
+        if(res.code == 200){
           Toast('编辑成功！');
           this.getList();
           this.show = false;
-        }).catch(err=>{
-          Toast(err);
-        })
+        }
       }else{
-        this.instance.post('/contact/new/json',info)
-        .then(res=>{
-          console.log(res);
+        let res = await this.$Http.newContactJson(info);
+        if(res.code == 200){
           Toast('新建成功！');
           this.getList();
           this.show = false;
-        }).catch(err=>{
-          Toast(err);
-        })
+        }
       }
     },
-    onDelete(info){
-      this.instance.delete('/contact',{
-        params:{
-          id: info.id
-        }
-      }).then(res=>{
-        if(res.data.code === 200){
-          this.show = false;
-          Toast('删除成功！');
-          this.getList();
-        }
-      }).catch(err=>{
-        Toast(err);
-      })
+    async onDelete(info){
+      let res = await this.$Http.delContact({id: info.id});
+      if(res.code === 200){
+        this.show = false;
+        Toast('删除成功！');
+        this.getList();
+      }
     }
   }
 }
